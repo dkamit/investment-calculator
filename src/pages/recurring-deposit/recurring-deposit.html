@@ -1,0 +1,79 @@
+<!--
+  Generated template for the RecurringDeposit page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Recurring Deposit</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Recurring Deposit
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Monthly Installment</ion-label>
+            <ion-input type="number" formControlName="monthly_installment" name="monthly_installment"></ion-input>
+          </ion-item>
+          <div *ngIf="isSubmitted && (myForm && !myForm.controls.monthly_installment.valid)" class="error">
+            Installment amount should be positive number
+          </div>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Rate of Interest</ion-label>
+            <ion-input type="number" formControlName="interest_rate" name="interest_rate"></ion-input>
+          </ion-item>
+          <div *ngIf="isSubmitted && (myForm && !myForm.controls.interest_rate.valid)" class="error">
+            Interest amount should be positive number
+          </div>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Number of Quarters</ion-label>
+            <ion-input type="number" formControlName="quarters" name="quarters"></ion-input>
+          </ion-item>
+          <div *ngIf="isSubmitted && (myForm && !myForm.controls.quarters.valid)" class="error">
+            Quarters should be positive number
+          </div>
+        </ion-list>
+        <ion-item>
+          <button ion-button class="calculate">Calculate</button>
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="isSubmitted && (myForm && myForm.valid)" class="error">
+    <ion-card>
+      <ion-card-header>
+        Earnings
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <div> Maturity Amount : {{maturity_amount}} </div>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <div> Interest Earned : {{interest_earned}} </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <div style="display: block">
+        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [options]="doughnutChartOptions" [chartType]="doughnutChartType">
+        </canvas>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

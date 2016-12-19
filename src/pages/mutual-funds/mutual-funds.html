@@ -1,0 +1,100 @@
+<!--
+  Generated template for the MutualFunds page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mutual Funds</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Mutual Funds
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Lumpsum Amount</ion-label>
+            <ion-input type="number" formControlName="lumpsum_amount" name="lumpsum_amount"></ion-input>
+          </ion-item>
+          <div *ngIf="isSubmitted && (myForm && !myForm.controls.lumpsum_amount.valid)" class="error">
+            Investment amount should be positive number
+          </div>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Initial Nav</ion-label>
+            <ion-input type="number" formControlName="initial_nav" name="initial_nav"></ion-input>
+          </ion-item>
+          <div *ngIf="isSubmitted && (myForm && !myForm.controls.initial_nav.valid)" class="error">
+            NAV amount should be positive number
+          </div>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Current Nav</ion-label>
+            <ion-input type="number" formControlName="current_nav" name="current_nav"></ion-input>
+          </ion-item>
+          <div *ngIf="isSubmitted && (myForm && !myForm.controls.current_nav.valid)" class="error">
+            NAV amount should be positive number
+          </div>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <ion-label floating>Term in Months</ion-label>
+            <ion-input type="number" formControlName="term" name="term"></ion-input>
+          </ion-item>
+          <div *ngIf="isSubmitted && (myForm && !myForm.controls.term.valid)" class="error">
+            Term should be positive number
+          </div>
+        </ion-list>
+        <ion-item>
+          <button ion-button class="calculate">Calculate</button>
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="isSubmitted && (myForm && myForm.valid)" class="error">
+    <ion-card>
+      <ion-card-header>
+        Earnings
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <div> Current Value : {{currentValue}} </div>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <div> Absolute Return : {{absoluteReturn}} </div>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <div> CAGR : {{compoundedAnnualGrowthRate}} </div>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <div> Simple Annualised Return : {{simpleAnnualisedReturn}} </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <div style="display: block">
+        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [options]="doughnutChartOptions" [chartType]="doughnutChartType">
+        </canvas>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

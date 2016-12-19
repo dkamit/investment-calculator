@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Investment Calculator
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header class="btn btn-primary">
+      Investments
+    </ion-card-header>
+
+    <ion-list>
+      <button ion-item (click)="fixedDeposits()">
+        Fixed Deposits
+      </button>
+
+      <button ion-item (click)="recurringDeposits()">
+        Recurring Deposits
+      </button>
+
+      <button ion-item (click)="mutualFunds()">
+        Mutual Funds
+      </button>
+
+      <button ion-item (click)="stocks()">
+        Stocks
+      </button>
+    </ion-list>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      Loans
+    </ion-card-header>
+
+    <ion-list>
+      <button ion-item (click)="personalLoan()">
+        Personal Loan
+      </button>
+
+      <button ion-item (click)="housingLoan()">
+        Housing Loan
+      </button>
+
+      <button ion-item (click)="carLoan()">
+        Car Loan
+      </button>
+
+      <button ion-item (click)="carLoan()">
+        Car Loan
+      </button>
+    </ion-list>
+  </ion-card>
+</ion-content>

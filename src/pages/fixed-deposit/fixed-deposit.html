@@ -1,0 +1,91 @@
+<!--
+  Generated template for the FixedDeposit page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Fixed Deposits</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Fixed Deposits
+    </ion-card-header>
+    <ion-card-content>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <ion-list>
+        <ion-item>
+            <ion-label floating>Deposit Amount</ion-label>
+            <ion-input type="number" formControlName="deposit_amount" name="deposit_amount"></ion-input>
+        </ion-item>
+        <div *ngIf="isSubmitted && (myForm && !myForm.controls.deposit_amount.valid)" class="error">
+          Deposit amount should be positive number
+        </div>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+            <ion-label floating>Annual Interest Rate</ion-label>
+            <ion-input type="number" formControlName="interest_rate" name="interest_rate"></ion-input>
+        </ion-item>
+        <div *ngIf="isSubmitted && (myForm && !myForm.controls.interest_rate.valid)" class="error">
+          Intrest rate should be positive number
+        </div>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+            <ion-label floating>Term</ion-label>
+            <ion-input type="number" formControlName="term" name="term" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"></ion-input>
+        </ion-item>
+        <div *ngIf="isSubmitted && (myForm && !myForm.controls.term.valid)" class="error">
+          Term should be positive number
+        </div>
+      </ion-list>
+      <ion-list radio-group formControlName="year_or_month" name="year_or_month">
+        <ion-item>
+          <ion-label>Years</ion-label>
+          <ion-radio value="years" checked="true"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Months</ion-label>
+          <ion-radio value="months"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <button ion-button class="calculate">Calculate</button>
+      </ion-item>
+    </form>
+    </ion-card-content>
+  </ion-card>
+  <div *ngIf="isSubmitted && (myForm && myForm.valid)" class="error">
+  <ion-card>
+    <ion-card-header>
+        Earnings
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <div> Maturity Amount : {{maturity_amount}} </div>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <div> Interest Earned : {{interest_earned}} </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <div style="display: block">
+      <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [options]="doughnutChartOptions"
+              [chartType]="doughnutChartType">
+      </canvas>
+    </div>
+  </ion-card>
+  </div>
+</ion-content>
